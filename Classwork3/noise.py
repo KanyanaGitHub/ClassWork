@@ -7,7 +7,7 @@ cv.imwrite("grayscale.png", img)
 
 def seasoning(img):
     density_salt = 0.1
-    density_pepper = 0.1
+    density_pepper = 0.15
 
     #set salt pix
     number_of_salt = int(density_salt * (img.shape[0] * img.shape[1]))
@@ -34,3 +34,6 @@ cv.imwrite("noise.png", noise_img)
 median = cv.medianBlur(noise_img, 5)
 
 cv.imwrite("conclution.png", median)
+cv.imshow("conclution", median)
+cv.waitKey(0)
+cv.destroyAllWindows()
