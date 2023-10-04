@@ -26,8 +26,17 @@ gradient_magnitude = np.sqrt(horizontal_gradient**2)
 gradient_magnitude = gradient_magnitude / gradient_magnitude.max()
 gradient_magnitude = (gradient_magnitude * 255).astype(np.uint8)
 
+# ทำการคูณกันใน Frequency Domain
+fft_result = fft_img * gradient_magnitude
+
+# ทำ Inverse Fourier Transform เพื่อกลับไปสู่ Spatial Domain
+result = np.fft.ifft2(fft_result)
+
+# แปลงเป็นภาพขาวดำ
+result = np.abs(result).astype(np.uint8)
+
+
 cv.imwrite("gray.png", img)
 cv.imwrite("Sobel.png", gradient_magnitude)
 cv.imwrite("FDomain.png", magnitude_spectrum.astype(np.uint8))
-
-
+cv.imwrite("con.png", result)
